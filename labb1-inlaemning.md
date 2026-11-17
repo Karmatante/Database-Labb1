@@ -39,8 +39,8 @@ databas skulle kunna bestå av tabellerna products, customers och orders.*
 
 **3. Vad är en tabell, en rad och en kolumn?**
 *För att fortsätta med dokumentskåpsanalogin – när vi lagrar information i dokumentskåpet så kastar vi inte bara in den.
-I stället skapar vi "filer" i dokumentskåpet, och data som är relaterade sparas i specifika filer. I en databas kan en "
-fil" jämföras med en tabell, och tabellen är en strukturerad samling data. En tabell kan innehålla en lista över kunder,
+I stället skapar vi "filer" i dokumentskåpet, och data som är relaterade sparas i specifika filer. I en databas kan en '
+fil' jämföras med en tabell, och tabellen är en strukturerad samling data. En tabell kan innehålla en lista över kunder,
 produkter eller patienter, t.ex.*
 *Viktigt att komma ihåg är att informationen som lagras i tabellen ska handla om samma sak. Man bör inte lagra t.ex.
 kundlistan och orderlistan i en och samma databastabell.*
@@ -56,42 +56,87 @@ primärnyckel är det nog svårt att uppdatera eller ta bort vissa rader, efters
 sätt identifiera exakt vilka rader som ska påverkas.*
 
 **5. Vad är en främmande nyckel?**
-
-Så som jag har förstått det är det inte bra om samma information lagras flera gånger i onödan, och det är en av
+*Så som jag har förstått det är det inte bra om samma information lagras flera gånger i onödan, och det är en av
 grundprinciperna bakom relationsdatabaser. Tabeller kan vara relaterade till varandra genom gemensamma värden. En
 främmande nyckel är i princip en kolumn i en tabell som innehåller värden från primärnyckeln i en annan tabell, för att
-på så sätt skapa relationen.
+på så sätt skapa relationen.*
 
-6. Varför är det bra att lagra kunduppgifter och köp i olika tabeller? *Antar att Emil handlar 5 gånger på Posh & Spicy
-   Webshop. Varje gång han handlar skapas en ny rad i webshoppens
-   orderdatabas, med uppgifter om ordern och kunduppgifter i samma rad. Emils data dyker upp i varenda en av hans 5
-   beställningar, på 5 olika rader. Det är onödiga dupliceringar. Och nu händer det att Emil flyttar, hans adress måste
-   då ändras, och det på 5 olika ställen i databastabellen. Det är onödigt komplicerat och t.o.m. osäkert. Ifall man
-   tex. missar ett ställe så har
-   kunden Emil två olika adresser i systemet.*
-   *Det är alltså bättre att lagra kunduppgifter och köp/ordrar i olika tabeller eftersom hantering och bearbetning av
-   datan blir mer genomförbart. Tabellerna kan ju sedan kopplas ihop genom primärnycklar och främmande nycklar.*
+**6. Varför är det bra att lagra kunduppgifter och köp i olika tabeller?**
+*Antar att Emil handlar 5 gånger på Posh & Spicy Webshop. Varje gång han handlar skapas en ny rad i webshoppens
+orderdatabas, med uppgifter om ordern och kunduppgifter i samma rad. Emils data dyker upp i varenda en av hans 5
+beställningar, på 5 olika rader. Det är onödiga dupliceringar. Och nu händer det att Emil flyttar, hans adress måste då
+ändras, och det på 5 olika ställen i databastabellen. Det är onödigt komplicerat och t.o.m. osäkert. Ifall man tex.
+missar ett ställe så har kunden Emil två olika adresser i systemet.*
+*Det är alltså bättre att lagra kunduppgifter och köp/ordrar i olika tabeller eftersom hantering och bearbetning av
+datan blir mer genomförbart. Tabellerna kan ju sedan kopplas ihop genom att en främmande nyckel i ordertabellen
+refererar till primärnyckeln i kundtabellen.*
 
 ## NoSQL
 
-7. Vad menas med NoSQL, och hur kan information organiseras i en sådan databas?
-8. Ge ett exempel på när en NoSQL-databas kan vara lämplig och förklara varför.
+**7. Vad menas med NoSQL, och hur kan information organiseras i en sådan databas?**
+*"Not only SQL" refererar till en typ av databas som inte använder den traditionella relationsmodellen på samma sätt som
+SQL-databaser gör. I stället är dessa databaser utformade för att hantera data som är strukturerade som dokument, i
+nyckel-värde-par eller som grafer.*
+*Data kan t.ex. lagras i JSON-liknande dokument. Varje dokument kan ha sin egen struktur, vilket ger en flexibilitet som
+man inte har på samma sätt i traditionella SQL-tabeller. Nyckel-värde-par lagrar data som en uppsättning nycklar med
+motsvarande värden. Grafdatabaser organiserar data i noder och relationer mellan dessa.*
+*NoSQL-databaser kan hantera stora mängder data, även data som inte har en lika bestämd struktur som i traditionella
+SQL-tabeller.*
+
+**8. Ge ett exempel på när en NoSQL-databas kan vara lämplig och förklara varför.**
+*Ett exempel kan vara en filmkatalog, som t.ex. Netflix skulle kunna använda. Olika filmer kan ha olika mycket
+information. Ett dokument behöver inte ha exakt samma fält som andra dokument. Detta gör det enklare att lägga till ny
+information. NoSQL-databaser har en flexibilitet i hur databasens struktur ser ut. En relationsdatabas skulle också
+kunna hantera detta, men man kan behöva ändra en gemensam tabell.*
 
 ## SQL – hämta data från tabellen person
 
 Skriv en SQL-fråga som svar på varje uppgift.
 
-9. Hämta alla kolumner för alla personer i tabellen.
+**9. Hämta alla kolumner för alla personer i tabellen.**
 
-10. Hämta endast förnamn och efternamn för alla personer.
+   ```sql
+   SELECT *
+   FROM person;
+   ```
 
-11. Hämta förnamn, efternamn och inkomst för personer med en inkomst över 30 000.
+**10. Hämta endast förnamn och efternamn för alla personer.**
 
-12. Hämta alla personer födda före den 1 januari 1990.
+ ```sql
+   SELECT first_name, last_name
+   FROM person;
+   ```
 
-13. Hämta förnamn, efternamn och inkomst, sorterat efter inkomst från högst till lägst.
+**11. Hämta förnamn, efternamn och inkomst för personer med en inkomst över 30 000.**
 
-14. Räkna hur många personer som finns i tabellen.
+ ```sql
+   SELECT first_name, last_name, income
+   FROM person
+   WHERE income > 30000;
+   ```
+
+**12. Hämta alla personer födda före den 1 januari 1990.**
+
+ ```sql
+   SELECT *
+   FROM person
+   WHERE dob < '1990-01-01';
+   ```
+
+**13. Hämta förnamn, efternamn och inkomst, sorterat efter inkomst från högst till lägst.**
+
+ ```sql
+   SELECT first_name, last_name, income
+   FROM person
+   ORDER BY income DESC;
+   ```
+
+**14. Räkna hur många personer som finns i tabellen.**
+
+ ```sql
+   SELECT COUNT(*)
+   FROM person;
+   ```
 
 # VG-nivå
 
