@@ -194,6 +194,7 @@ tekniskt fel.*
 överföringar som faktiskt har genomförts. Genom att använda transaktioner kan banken skydda informationen och se till
 att överföringar genomförs på ett säkrare och mer tillförlitligt sätt, förutsatt att båda kontoändringarna ingår i samma
 transaktion.*
+
 --- 
 
 **2. Välj ett enkelt system, antingen en webbutik eller en chatt.
